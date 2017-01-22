@@ -16,6 +16,8 @@ import { VerificationPage } from '../pages/verification/verification';
 import { PhoneService } from '../services/phone';
 import { PictureService } from '../services/picture';
 import { MyApp } from './app.component';
+import { AgmCoreModule } from 'angular2-google-maps/core';
+import { NewLocationMessageComponent } from '../pages/messages/location-message';
 
 @NgModule({
   declarations: [
@@ -29,13 +31,17 @@ import { MyApp } from './app.component';
     MessagesPage,
     MyApp,
     NewChatComponent,
+    NewLocationMessageComponent,
     ProfilePage,
     ShowPictureComponent,
     VerificationPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    MomentModule
+    MomentModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAWoBdZHCNh5R-hB5S5ZZ2oeoYyfdDgniA'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -47,6 +53,7 @@ import { MyApp } from './app.component';
     MessagesAttachmentsComponent,
     MyApp,
     NewChatComponent,
+    NewLocationMessageComponent,
     ProfilePage,
     ShowPictureComponent,
     VerificationPage

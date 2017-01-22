@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Messages } from 'api/collections';
-import { MessageOwnership, MessageType, Chat, Message } from 'api/models';
+import { MessageOwnership, MessageType, Chat, Message, Location } from 'api/models';
 import { ModalController, NavParams, PopoverController } from 'ionic-angular';
 import { MeteorObservable } from 'meteor-rxjs';
 import { Meteor } from 'meteor/meteor';
@@ -102,8 +102,16 @@ export class MessagesPage implements OnInit, OnDestroy {
     });
 
     popover.onDidDismiss((params) => {
-      const blob: Blob = params.selectedPicture;
-      this.sendPictureMessage(blob);
+      if (params) {
+        if (params.messageType === MessageType.PICTURE) {
+          const blob: Blob = params.selectedPicture;
+          this.sendPictureMessage(blob);
+        }
+        else if (params.messageType === MessageType.LOCATION) {
+          const location = params.selectedLocation;
+          this.sendLocationMessage(location);
+        }
+      }
     });
 
     popover.present();
@@ -166,7 +174,7 @@ export class MessagesPage implements OnInit, OnDestroy {
   }
 
   // Finds relevant messages and groups them by their creation day
-  findMessagesDayGroups(): Observable<Message[]> {
+  findMessagesDayGroups(): Observable<{timestamp: string, messages: Message[], today: boolean}[]> {
     return Messages.find({
       chatId: this.selectedChat._id
     }, {
@@ -185,16 +193,16 @@ export class MessagesPage implements OnInit, OnDestroy {
       });
 
       // Group by creation day
-      messages = _.groupBy(messages, (message) => {
+      const groupedMessages = _.groupBy(messages, (message) => {
         return Moment(message.createdAt).format(format);
       });
 
       // Transform dictionary into an array since Angular's view engine doesn't know how
       // to iterate through it
-      return Object.keys(messages).map((timestamp) => {
+      return Object.keys(groupedMessages).map((timestamp: string) => {
         return {
           timestamp: timestamp,
-          messages: messages[timestamp],
+          messages: groupedMessages[timestamp],
           today: Moment().format(format) == timestamp
         };
       });
@@ -215,6 +223,16 @@ export class MessagesPage implements OnInit, OnDestroy {
         this.selectedChat._id,
         picture.url
       ).zone().subscribe();
+    });
+  }
+
+  sendLocationMessage(location: Location): void {
+    MeteorObservable.call('addMessage', MessageType.LOCATION,
+      this.selectedChat._id,
+      `${location.lat},${location.lng},${location.zoom}`
+    ).zone().subscribe(() => {
+      // Zero the input field
+      this.message = '';
     });
   }
 
@@ -241,6 +259,16 @@ export class MessagesPage implements OnInit, OnDestroy {
     });
 
     return autoScroller;
+  }
+
+  getLocation(locationString: string): Location {
+    const splitted = locationString.split(',').map(Number);
+
+    return <Location>{
+      lat: splitted[0],
+      lng: splitted[1],
+      zoom: Math.min(splitted[2] || 0, 19)
+    };
   }
 
   scrollDown(): void {
