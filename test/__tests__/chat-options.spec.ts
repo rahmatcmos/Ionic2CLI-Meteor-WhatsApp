@@ -2,11 +2,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement, ErrorHandler } from '@angular/core';
 import { ChatsOptionsComponent } from '../../src/pages/chats/chats-options';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-import { IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { IonicModule, IonicErrorHandler, NavController, ViewController, NavControllerBase } from 'ionic-angular';
 import { MyApp } from '../../src/app/app.component';
 import { PictureService } from '../../src/services/picture';
 import { PhoneService } from '../../src/services/phone';
 import { MomentModule } from 'angular2-moment';
+import { ViewControllerMock } from '../__mocks__/ionic/view-controller';
+import { NavControllerMock } from '../__mocks__/ionic/nav-controller';
 
 describe('ChatsOptionsComponent', () => {
   let comp: ChatsOptionsComponent;
@@ -22,12 +24,14 @@ describe('ChatsOptionsComponent', () => {
       ],
       imports: [
         MomentModule,
-        IonicModule.forRoot(MyApp, { animate: false })
+        IonicModule.forRoot(MyApp)
       ],
       providers: [
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         PhoneService,
-        PictureService
+        PictureService,
+        {provide: NavController, useClass: NavControllerMock },
+        {provide: ViewController, useClass: ViewControllerMock }
       ]
     });
 
