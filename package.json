@@ -5,9 +5,11 @@
   "private": true,
   "scripts": {
     "api": "cd api && meteor run --settings private/settings.json",
+    "lint:meteor": "tslint --format stylish --config ./tslint.json ./api/**/*.ts",
+    "lint:ionic": "ionic-app-scripts lint",
+    "lint": "npm run lint:meteor && lint:ionic",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
-    "ionic:lint": "ionic-app-scripts lint",
     "meteor-client:bundle": "node meteor-client/bundler.js"
   },
   "dependencies": {

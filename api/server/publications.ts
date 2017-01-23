@@ -5,7 +5,9 @@ import { Chat, Message, Picture, User } from './models';
 
 export function initPublications() {
   Meteor.publish('user', function () {
-    if (!this.userId) return;
+    if (!this.userId) {
+      return;
+    }
 
     const profile = Users.findOne(this.userId).profile || {};
 
@@ -18,8 +20,9 @@ export function initPublications() {
     chatId: string,
     messagesBatchCounter: number
   ): Mongo.Cursor<Message> {
-    if (!this.userId) return;
-    if (!chatId) return;
+    if (!this.userId || !chatId) {
+      return;
+    }
 
     return Messages.collection.find({
       chatId
@@ -32,8 +35,9 @@ export function initPublications() {
   Meteor.publishComposite('users', function(
     pattern: string
   ): PublishCompositeConfig<User> {
-    if (!this.userId) return;
-    if (!pattern) return;
+    if (!this.userId || !pattern) {
+      return;
+    }
 
     return {
       find: () => {
@@ -54,11 +58,13 @@ export function initPublications() {
           }
         }
       ]
-    }
+    };
   });
 
   Meteor.publishComposite('chats', function(): PublishCompositeConfig<Chat> {
-    if (!this.userId) return;
+    if (!this.userId) {
+      return;
+    }
 
     return {
       find: () => {

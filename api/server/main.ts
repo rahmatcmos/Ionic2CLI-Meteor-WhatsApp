@@ -14,7 +14,9 @@ Meteor.startup(() => {
     SMS.twilio = Meteor.settings['twilio'];
   }
 
-  if (Users.collection.find().count()) return;
+  if (Users.collection.find().count() > 0) {
+    return;
+  }
 
   let picture = importPictureFromUrl({
     name: 'man1.jpg',
@@ -84,5 +86,6 @@ Meteor.startup(() => {
 
 function importPictureFromUrl(options: { name: string, url: string }): Picture {
   const description = { name: options.name };
+
   return Meteor.call('ufsImportURL', options.url, description, 'pictures');
 }

@@ -1,3 +1,4 @@
+/* tslint:disable */
 /*
   Declaration files are how the Typescript compiler knows about the type information(or shape) of an object.
   They're what make intellisense work and make Typescript know all about your code.
@@ -11,10 +12,28 @@
   For more info on type definition files, check out the Typescript docs here:
   https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html
 */
-/// <reference types="meteor-typings" />
-/// <reference types="@types/meteor-accounts-phone" />
-/// <reference types="@types/meteor-publish-composite" />
-/// <reference types="@types/underscore" />
-/// <reference path="../api/server/collections/hooks.d.ts" />
+
 declare module '*';
 
+declare module 'meteor/check' {
+  module Match {
+    declare var Any: any;
+    declare var String: any;
+    declare var Integer: any;
+    declare var Boolean: any;
+    declare var undefined: any;
+    declare var Object: any;
+
+    function Optional(pattern: any): boolean;
+
+    function ObjectIncluding(dico: any): boolean;
+
+    function OneOf(...patterns: any[]): any;
+
+    function Where(condition: any): any;
+
+    function test(value: any, pattern: any): boolean;
+  }
+
+  function check(value: any, pattern: any): void;
+}
