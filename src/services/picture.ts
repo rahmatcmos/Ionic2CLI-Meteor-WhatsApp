@@ -11,11 +11,18 @@ export class PictureService {
   constructor(private platform: Platform) {}
 
   select(): Promise<Blob> {
-    if (!this.platform.is('mobile')) return new Promise((resolve, reject) => {
-      UploadFS.selectFile((file: File) => {
-        resolve(file);
+    if (!this.platform.is('mobile')) {
+      return new Promise((resolve, reject) => {
+        try {
+          UploadFS.selectFile((file: File) => {
+            resolve(file);
+          });
+        }
+        catch(e) {
+          reject(e);
+        }
       });
-    });
+    }
 
     return ImagePicker.getPictures({ maximumImagesCount: 1 }).then((URL: string) => {
       return this.convertURLtoBlob(URL);
@@ -25,7 +32,10 @@ export class PictureService {
   upload(blob: Blob): Promise<Picture> {
     return new Promise((resolve, reject) => {
       const metadata = _.pick(blob, 'name', 'type', 'size');
-      if (!metadata.name) metadata.name = DEFAULT_PICTURE_NAME;
+
+      if (!metadata.name) {
+        metadata.name = DEFAULT_PICTURE_NAME;
+      }
 
       const upload = new UploadFS.Uploader({
         data: blob,

@@ -8,7 +8,7 @@ import { VerificationPage } from '../verification/verification';
   templateUrl: 'login.html'
 })
 export class LoginPage implements AfterContentInit {
-  phone = '';
+  private phone = '';
 
   constructor(
     private alertCtrl: AlertController,
@@ -18,12 +18,14 @@ export class LoginPage implements AfterContentInit {
 
   ngAfterContentInit() {
     this.phoneService.getNumber().then((phone) => {
-      if (phone) this.login(phone);
+      if (phone) {
+        this.login(phone);
+      }
     });
   }
 
   onInputKeypress({keyCode}: KeyboardEvent): void {
-    if (keyCode == 13) {
+    if (keyCode === 13) {
       this.login();
     }
   }

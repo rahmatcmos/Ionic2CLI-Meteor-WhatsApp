@@ -8,7 +8,9 @@ import { AppModule } from './app.module';
 
 Meteor.startup(() => {
   const subscription = MeteorObservable.autorun().subscribe(() => {
-    if (Meteor.loggingIn()) return;
+    if (Meteor.loggingIn()) {
+      return;
+    }
 
     setTimeout(() => subscription.unsubscribe());
     platformBrowserDynamic().bootstrapModule(AppModule);

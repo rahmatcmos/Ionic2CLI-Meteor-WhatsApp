@@ -39,7 +39,7 @@ export class ChatsPage implements OnInit {
         chat.title = '';
         chat.picture = '';
 
-        const receiverId = chat.memberIds.find(memberId => memberId != this.senderId);
+        const receiverId = chat.memberIds.find(memberId => memberId !== this.senderId);
         const receiver = Users.findOne(receiverId);
 
         if (receiver) {
@@ -49,7 +49,7 @@ export class ChatsPage implements OnInit {
 
         // This will make the last message reactive
         this.findLastChatMessage(chat._id).subscribe((message) => {
-          chat.lastMessage = message
+          chat.lastMessage = message;
         });
       });
 
@@ -68,15 +68,16 @@ export class ChatsPage implements OnInit {
         }).subscribe({
           next: (messages) => {
             // Invoke subscription with the last message found
-            if (!messages.length) return;
+            if (!messages.length) {
+              return;
+            }
+
             const lastMessage = messages[0];
             observer.next(lastMessage);
           },
-
           error: (e) => {
             observer.error(e);
           },
-
           complete: () => {
             observer.complete();
           }
@@ -105,7 +106,9 @@ export class ChatsPage implements OnInit {
   removeChat(chat: Chat): void {
     MeteorObservable.call('removeChat', chat._id).subscribe({
       error: (e: Error) => {
-        if (e) this.handleError(e);
+        if (e) {
+          this.handleError(e);
+        }
       }
     });
   }
@@ -114,9 +117,9 @@ export class ChatsPage implements OnInit {
     console.error(e);
 
     const alert = this.alertCtrl.create({
-      title: 'Oops!',
+      buttons: ['OK'],
       message: e.message,
-      buttons: ['OK']
+      title: 'Oops!'
     });
 
     alert.present();

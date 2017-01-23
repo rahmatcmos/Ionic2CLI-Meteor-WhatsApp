@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, NavController, NavParams } from 'ionic-angular';
 import { PhoneService } from '../../services/phone';
-import { ProfilePage } from "../profile/profile";
+import { ProfilePage } from '../profile/profile';
 
 @Component({
   selector: 'verification',
   templateUrl: 'verification.html'
 })
 export class VerificationPage implements OnInit {
-  code: string = '';
-  phone: string;
+  private code: string = '';
+  private phone: string;
 
   constructor(
     private alertCtrl: AlertController,
@@ -23,7 +23,7 @@ export class VerificationPage implements OnInit {
   }
 
   onInputKeypress({keyCode}: KeyboardEvent): void {
-    if (keyCode == 13) {
+    if (keyCode === 13) {
       this.verify();
     }
   }

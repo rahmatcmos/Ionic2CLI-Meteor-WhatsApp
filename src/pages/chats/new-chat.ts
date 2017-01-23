@@ -32,8 +32,11 @@ export class NewChatComponent {
       // Prevents the search bar from being spammed
       .debounce(() => Observable.timer(1000))
       .forEach(() => {
-        if (this.usersSubscription) this.usersSubscription.unsubscribe();
-        this.usersSubscription = this.subscribeUsers()
+        if (this.usersSubscription) {
+          this.usersSubscription.unsubscribe();
+        }
+
+        this.usersSubscription = this.subscribeUsers();
       });
   }
 
@@ -96,9 +99,9 @@ export class NewChatComponent {
     console.error(e);
 
     const alert = this.alertCtrl.create({
-      title: 'Oops!',
+      buttons: ['OK'],
       message: e.message,
-      buttons: ['OK']
+      title: 'Oops!'
     });
 
     alert.present();

@@ -14,7 +14,10 @@ export class AutofocusDirective implements AfterContentInit {
     const input = this.input;
 
     if (input) {
-      if (!input.hasAttribute('tabindex')) input.setAttribute('tabindex', '0');
+      if (!input.hasAttribute('tabindex')) {
+        input.setAttribute('tabindex', '0');
+      }
+
       input.focus();
     }
   }

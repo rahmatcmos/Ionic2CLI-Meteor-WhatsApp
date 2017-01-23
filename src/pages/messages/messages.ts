@@ -88,7 +88,7 @@ export class MessagesPage implements OnInit, OnDestroy {
   }
 
   onInputKeypress({ keyCode }: KeyboardEvent): void {
-    if (keyCode == 13) {
+    if (keyCode === 13) {
       this.sendTextMessage();
     }
   }
@@ -140,7 +140,10 @@ export class MessagesPage implements OnInit, OnDestroy {
       ++this.messagesBatchCounter
     ).subscribe(() => {
       // Keep tracking changes in the dataset and re-render the view
-      if (!this.messagesComputation) this.messagesComputation = this.autorunMessages();
+      if (!this.messagesComputation) {
+        this.messagesComputation = this.autorunMessages();
+      }
+
       // Allow incoming subscription requests
       this.loadingMessages = false;
     });
@@ -152,13 +155,16 @@ export class MessagesPage implements OnInit, OnDestroy {
       Messages.find().subscribe({
         next: (messages) => {
           // Once all messages have been fetched
-          if (messagesCount != messages.length) return;
+          if (messagesCount !== messages.length) {
+            return;
+          }
+
           // Signal to stop listening to the scroll event
           observer.next();
+
           // Finish the observation to prevent unnecessary calculations
           observer.complete();
         },
-
         error: (e) => {
           observer.error(e);
         }
@@ -185,7 +191,7 @@ export class MessagesPage implements OnInit, OnDestroy {
 
       // Compose missing data that we would like to show in the view
       messages.forEach((message) => {
-        message.ownership = this.senderId == message.senderId ?
+        message.ownership = this.senderId === message.senderId ?
           MessageOwnership.MINE :
           MessageOwnership.OTHER;
 
@@ -203,7 +209,7 @@ export class MessagesPage implements OnInit, OnDestroy {
         return {
           timestamp: timestamp,
           messages: groupedMessages[timestamp],
-          today: Moment().format(format) == timestamp
+          today: Moment().format(format) === timestamp
         };
       });
     });
@@ -238,7 +244,9 @@ export class MessagesPage implements OnInit, OnDestroy {
 
   sendTextMessage(): void {
     // If message was yet to be typed, abort
-    if (!this.message) return;
+    if (!this.message) {
+      return;
+    }
 
     MeteorObservable.call('addMessage', MessageType.TEXT,
       this.selectedChat._id,
@@ -273,7 +281,9 @@ export class MessagesPage implements OnInit, OnDestroy {
 
   scrollDown(): void {
     // Don't scroll down if messages subscription is being loaded
-    if (this.loadingMessages) return;
+    if (this.loadingMessages) {
+      return;
+    }
 
     // Scroll down and apply specified offset
     this.scroller.scrollTop = this.scroller.scrollHeight - this.scrollOffset;
@@ -281,4 +291,3 @@ export class MessagesPage implements OnInit, OnDestroy {
     this.scrollOffset = 0;
   }
 }
-

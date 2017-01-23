@@ -8,7 +8,7 @@ import { ChatsOptionsComponent } from '../pages/chats/chats-options';
 import { NewChatComponent } from '../pages/chats/new-chat';
 import { LoginPage } from '../pages/login/login';
 import { MessagesPage } from '../pages/messages/messages';
-import { MessagesAttachmentsComponent } from '../pages/messages/messages-attachments'
+import { MessagesAttachmentsComponent } from '../pages/messages/messages-attachments';
 import { MessagesOptionsComponent } from '../pages/messages/messages-options';
 import { ShowPictureComponent } from '../pages/messages/show-picture';
 import { ProfilePage } from '../pages/profile/profile';
@@ -20,6 +20,7 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import { NewLocationMessageComponent } from '../pages/messages/location-message';
 
 @NgModule({
+  bootstrap: [IonicApp],
   declarations: [
     AutofocusDirective,
     ObserveDirective,
@@ -36,14 +37,6 @@ import { NewLocationMessageComponent } from '../pages/messages/location-message'
     ShowPictureComponent,
     VerificationPage
   ],
-  imports: [
-    IonicModule.forRoot(MyApp),
-    MomentModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAWoBdZHCNh5R-hB5S5ZZ2oeoYyfdDgniA'
-    })
-  ],
-  bootstrap: [IonicApp],
   entryComponents: [
     ChatsOptionsComponent,
     ChatsPage,
@@ -57,6 +50,13 @@ import { NewLocationMessageComponent } from '../pages/messages/location-message'
     ProfilePage,
     ShowPictureComponent,
     VerificationPage
+  ],
+  imports: [
+    IonicModule.forRoot(MyApp),
+    MomentModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAWoBdZHCNh5R-hB5S5ZZ2oeoYyfdDgniA'
+    })
   ],
   providers: [
     { provide: ErrorHandler, useClass: IonicErrorHandler },

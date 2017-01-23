@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   selector : '[observe]'
 })
 export class ObserveDirective implements OnInit {
-  @Output('observe') observer = new EventEmitter();
+  @Output('observe') private observer = new EventEmitter();
 
   constructor(private el: ElementRef) {}
 

@@ -1,11 +1,15 @@
 {
+  "extends": "tslint:recommended",
   "rules": {
-    "no-duplicate-variable": true,
-    "no-unused-variable": [
-      true
-    ]
-  },
-  "rulesDirectory": [
-    "node_modules/tslint-eslint-rules/dist/rules"
-  ]
+    "use-strict": true,
+    "no-console": false,
+    "quotemark": [true, "single"],
+    "trailing-comma": false,
+    "no-unused-variable": [true, {"ignore-pattern": "^ng"}],
+    "member-access": false,
+    "whitespace": false,
+    "no-trailing-whitespace": false,
+    "object-literal-sort-keys": false,
+    "one-line": false
+  }
 }

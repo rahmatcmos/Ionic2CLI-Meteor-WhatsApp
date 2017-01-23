@@ -50,7 +50,9 @@ export class MessagesOptionsComponent {
       },
       error: (e: Error) => {
         alert.dismiss().then(() => {
-          if (e) return this.handleError(e);
+          if (e) {
+            return this.handleError(e);
+          }
 
           this.navCtrl.setRoot(ChatsPage, {}, {
             animate: true
