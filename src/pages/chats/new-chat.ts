@@ -69,7 +69,6 @@ export class NewChatComponent {
         memberIds: 1
       }
     })
-    // The initial value of the upcoming mapping function
     .startWith([])
     .mergeMap((chats) => {
       // Get all userIDs who we're chatting with
@@ -82,7 +81,7 @@ export class NewChatComponent {
       // Find all users which are not in belonging chats
       return Users.find({
         _id: { $nin: recieverIds }
-      })
+      });
     })
     .map((users) => {
       users.forEach((user) => {
