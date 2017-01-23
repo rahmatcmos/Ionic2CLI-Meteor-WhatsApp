@@ -1,3 +1,5 @@
+/* tslint:disable */
+
 // Type definitions for Meteor package matb33:collection-hooks
 // Project: https://github.com/matb33/meteor-collection-hooks
 // Source: https://github.com/twastvedt/typed-meteor-collection-hooks
