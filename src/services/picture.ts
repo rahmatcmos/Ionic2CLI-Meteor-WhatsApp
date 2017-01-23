@@ -8,26 +8,24 @@ import { _ } from 'meteor/underscore';
 
 @Injectable()
 export class PictureService {
-  constructor(private platform: Platform) {}
+  constructor(private platform: Platform) {
+  }
 
   select(): Promise<Blob> {
-    if (!this.platform.is('cordova') ||
-        !this.platform.is('mobile')) {
+    if (!this.platform.is('cordova') || !this.platform.is('mobile')) {
       return new Promise((resolve, reject) => {
-        UploadFS.selectFile((file: File) => {
-          try {
-            UploadFS.selectFile((file: File) => {
-              resolve(file);
-            });
-          }
-          catch(e) {
-            reject(e);
-          }
-        });
+        try {
+          UploadFS.selectFile((file: File) => {
+            resolve(file);
+          });
+        }
+        catch (e) {
+          reject(e);
+        }
       });
     }
 
-    return ImagePicker.getPictures({ maximumImagesCount: 1 }).then((URL: string) => {
+    return ImagePicker.getPictures({maximumImagesCount: 1}).then((URL: string) => {
       return this.convertURLtoBlob(URL);
     });
   }
@@ -100,6 +98,6 @@ export class PictureService {
       .map<number>(binary.charCodeAt.bind(binary));
 
     // Build blob with typed array
-    return new Blob([new Uint8Array(charCodes)], { type: 'image/jpeg' });
+    return new Blob([new Uint8Array(charCodes)], {type: 'image/jpeg'});
   }
 }
