@@ -17,6 +17,7 @@ export enum MessageType {
 
 export interface Profile {
   name?: string;
+  picture?: string;
   pictureId?: string;
 }
 
