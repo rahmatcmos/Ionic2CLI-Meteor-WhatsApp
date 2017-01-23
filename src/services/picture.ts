@@ -11,16 +11,19 @@ export class PictureService {
   constructor(private platform: Platform) {}
 
   select(): Promise<Blob> {
-    if (!this.platform.is('mobile')) {
+    if (!this.platform.is('cordova') ||
+        !this.platform.is('mobile')) {
       return new Promise((resolve, reject) => {
-        try {
-          UploadFS.selectFile((file: File) => {
-            resolve(file);
-          });
-        }
-        catch(e) {
-          reject(e);
-        }
+        UploadFS.selectFile((file: File) => {
+          try {
+            UploadFS.selectFile((file: File) => {
+              resolve(file);
+            });
+          }
+          catch(e) {
+            reject(e);
+          }
+        });
       });
     }
 
