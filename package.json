@@ -10,7 +10,8 @@
     "lint": "npm run lint:meteor && lint:ionic",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
-    "meteor-client:bundle": "node meteor-client/bundler.js"
+    "meteor-client:bundle": "node meteor-client/bundler.js",
+    "test:ionic": "jest"
   },
   "dependencies": {
     "@angular/common": "2.4.4",
@@ -23,6 +24,7 @@
     "@angular/platform-browser-dynamic": "2.4.4",
     "@angular/platform-server": "2.4.4",
     "@ionic/storage": "1.1.7",
+    "@types/jest": "^16.0.4",
     "angular2-google-maps": "0.17.0",
     "angular2-moment": "1.1.0",
     "babel-runtime": "6.22.0",
@@ -43,7 +45,11 @@
     "@types/meteor-accounts-phone": "0.0.5",
     "@types/meteor-publish-composite": "0.0.32",
     "@types/underscore": "1.7.36",
-    "tmp": "0.0.31",
+    "angular2-template-loader": "^0.6.0",
+    "jest": "^18.1.0",
+    "jsesc": "^2.4.0",
+    "mock-local-storage": "^1.0.2",
+    "raf": "^3.3.0",
     "typescript": "2.1.5",
     "typescript-extends": "1.0.1"
   },
@@ -64,5 +70,25 @@
   "description": "Ionic2CLI-Meteor-Whatsapp: An Ionic project",
   "config": {
     "ionic_webpack": "./webpack.config.js"
+  },
+  "jest": {
+    "verbose": true,
+    "collectCoverage": false,
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "html",
+      "css",
+      ""
+    ],
+    "setupTestFrameworkScriptFile": "<rootDir>/test/config/init.ts",
+    "testRegex": "/__tests__/.*\\.(ts|tsx|js)$",
+    "transform": {
+      "^.+\\.(ts|tsx|html)$": "<rootDir>/test/config/preprocessor.js"
+    },
+    "moduleNameMapper": {
+      "^api/(.*)": "<rootDir>/api/server/$1"
+    }
   }
 }
