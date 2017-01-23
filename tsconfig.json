@@ -18,7 +18,13 @@
     "target": "es5",
     "skipLibCheck": true,
     "stripInternal": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "types": [
+      "meteor-typings",
+      "@types/meteor-accounts-phone",
+      "@types/meteor-publish-composite",
+      "@types/underscore"
+    ]
   },
   "include": [
     "src/**/*.ts",
