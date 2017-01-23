@@ -59,7 +59,7 @@ export class NewChatComponent {
     const autorun = MeteorObservable.autorun();
 
     return Observable.merge(subscription, autorun).subscribe(() => {
-      this.users = this.findUsers().zone();
+      this.users = this.findUsers();
     });
   }
 
@@ -72,10 +72,11 @@ export class NewChatComponent {
         memberIds: 1
       }
     })
+    // Invoke merge-map with an empty array in case no chat found
     .startWith([])
     .mergeMap((chats) => {
       // Get all userIDs who we're chatting with
-      const recieverIds = _.chain(chats)
+      const receiverIds = _.chain(chats)
         .pluck('memberIds')
         .flatten()
         .concat(this.senderId)
@@ -83,8 +84,10 @@ export class NewChatComponent {
 
       // Find all users which are not in belonging chats
       return Users.find({
-        _id: { $nin: recieverIds }
-      });
+        _id: { $nin: receiverIds }
+      })
+      // Invoke map with an empty array in case no user found
+      .startWith([]);
     })
     .map((users) => {
       users.forEach((user) => {
