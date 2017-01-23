@@ -7,7 +7,7 @@
     "api": "cd api && meteor run --settings private/settings.json",
     "lint:meteor": "tslint --format stylish --config ./tslint.json ./api/**/*.ts",
     "lint:ionic": "ionic-app-scripts lint",
-    "lint": "npm run lint:meteor && lint:ionic",
+    "lint": "npm run lint:meteor && npm run lint:ionic",
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
     "meteor-client:bundle": "node meteor-client/bundler.js",
