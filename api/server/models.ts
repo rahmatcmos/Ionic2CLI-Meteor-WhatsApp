@@ -1,3 +1,5 @@
+export const DEFAULT_PICTURE_URL = '/ionicons/dist/svg/ios-contact.svg';
+
 export interface Profile {
   name?: string;
   picture?: string;
@@ -35,4 +37,20 @@ export interface Location {
   lat: number;
   lng: number;
   zoom: number;
+}
+
+export interface Picture {
+  _id?: string;
+  complete?: boolean;
+  extension?: string;
+  name?: string;
+  progress?: number;
+  size?: number;
+  store?: string;
+  token?: string;
+  type?: string;
+  uploadedAt?: Date;
+  uploading?: boolean;
+  url?: string;
+  userId?: string;
 }
