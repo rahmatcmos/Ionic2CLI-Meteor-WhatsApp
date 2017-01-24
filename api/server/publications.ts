@@ -1,4 +1,4 @@
-import { User, Message, Chat } from './models';
+import { User, Message, Chat, Picture } from './models';
 import { Users } from './collections/users';
 import { Messages } from './collections/messages';
 import { Chats } from './collections/chats';
@@ -16,7 +16,7 @@ Meteor.publishComposite('users', function(
   if (pattern) {
     selector = {
       'profile.name': { $regex: pattern, $options: 'i' }
-    };
+    }
   }
 
   return {
@@ -25,7 +25,17 @@ Meteor.publishComposite('users', function(
         fields: { profile: 1 },
         limit: 15
       });
-    }
+    },
+
+    children: [
+      <PublishCompositeConfig1<User, Picture>> {
+        find: (user) => {
+          return Pictures.collection.find(user.profile.pictureId, {
+            fields: { url: 1 }
+          });
+        }
+      }
+    ]
   };
 });
 
