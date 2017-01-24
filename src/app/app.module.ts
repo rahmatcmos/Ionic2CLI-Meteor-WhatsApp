@@ -9,6 +9,7 @@ import { PhoneService } from '../services/phone';
 import { VerificationPage } from '../pages/verification/verification';
 import { ProfilePage } from '../pages/profile/profile';
 import { ChatsOptionsComponent } from '../pages/chats/chats-options';
+import { NewChatComponent } from '../pages/chats/new-chat';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ChatsOptionsComponent } from '../pages/chats/chats-options';
     LoginPage,
     VerificationPage,
     ProfilePage,
-    ChatsOptionsComponent
+    ChatsOptionsComponent,
+    NewChatComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -32,7 +34,8 @@ import { ChatsOptionsComponent } from '../pages/chats/chats-options';
     LoginPage,
     VerificationPage,
     ProfilePage,
-    ChatsOptionsComponent
+    ChatsOptionsComponent,
+    NewChatComponent
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
