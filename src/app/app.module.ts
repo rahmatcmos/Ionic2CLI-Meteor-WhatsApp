@@ -6,13 +6,15 @@ import { MomentModule } from 'angular2-moment';
 import { MessagesPage } from '../pages/messages/messages';
 import { LoginPage } from '../pages/login/login';
 import { PhoneService } from '../services/phone';
+import { VerificationPage } from '../pages/verification/verification';
 
 @NgModule({
   declarations: [
     MyApp,
     ChatsPage,
     MessagesPage,
-    LoginPage
+    LoginPage,
+    VerificationPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -23,7 +25,8 @@ import { PhoneService } from '../services/phone';
     MyApp,
     ChatsPage,
     MessagesPage,
-    LoginPage
+    LoginPage,
+    VerificationPage
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
