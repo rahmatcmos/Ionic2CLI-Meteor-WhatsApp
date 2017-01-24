@@ -5,6 +5,7 @@ import { ChatsPage } from '../pages/chats/chats';
 import { MomentModule } from 'angular2-moment';
 import { MessagesPage } from '../pages/messages/messages';
 import { LoginPage } from '../pages/login/login';
+import { PhoneService } from '../services/phone';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,9 @@ import { LoginPage } from '../pages/login/login';
     MessagesPage,
     LoginPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    PhoneService
+  ]
 })
 export class AppModule {}
