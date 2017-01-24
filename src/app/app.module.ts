@@ -4,12 +4,14 @@ import { MyApp } from './app.component';
 import { ChatsPage } from '../pages/chats/chats';
 import { MomentModule } from 'angular2-moment';
 import { MessagesPage } from '../pages/messages/messages';
+import { LoginPage } from '../pages/login/login';
 
 @NgModule({
   declarations: [
     MyApp,
     ChatsPage,
-    MessagesPage
+    MessagesPage,
+    LoginPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -19,7 +21,8 @@ import { MessagesPage } from '../pages/messages/messages';
   entryComponents: [
     MyApp,
     ChatsPage,
-    MessagesPage
+    MessagesPage,
+    LoginPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
