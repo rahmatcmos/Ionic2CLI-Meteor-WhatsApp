@@ -18,4 +18,16 @@ export class PhoneService {
       });
     });
   }
+
+  login(phoneNumber: string, code: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      Accounts.verifyPhone(phoneNumber, code, (e: Error) => {
+        if (e) {
+          return reject(e);
+        }
+
+        resolve();
+      });
+    });
+  }
 }
