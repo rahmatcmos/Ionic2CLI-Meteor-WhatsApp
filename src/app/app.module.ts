@@ -12,6 +12,7 @@ import { ChatsOptionsComponent } from '../pages/chats/chats-options';
 import { NewChatComponent } from '../pages/chats/new-chat';
 import { MessagesOptionsComponent } from '../pages/messages/messages-options';
 import { AgmCoreModule } from 'angular2-google-maps/core';
+import { MessagesAttachmentsComponent } from '../pages/messages/messages-attachments';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
     ProfilePage,
     ChatsOptionsComponent,
     NewChatComponent,
-    MessagesOptionsComponent
+    MessagesOptionsComponent,
+    MessagesAttachmentsComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -42,7 +44,8 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
     ProfilePage,
     ChatsOptionsComponent,
     NewChatComponent,
-    MessagesOptionsComponent
+    MessagesOptionsComponent,
+    MessagesAttachmentsComponent
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
