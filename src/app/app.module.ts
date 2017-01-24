@@ -14,6 +14,7 @@ import { MessagesOptionsComponent } from '../pages/messages/messages-options';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { MessagesAttachmentsComponent } from '../pages/messages/messages-attachments';
 import { NewLocationMessageComponent } from '../pages/messages/location-message';
+import { PictureService } from '../services/picture';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { NewLocationMessageComponent } from '../pages/messages/location-message'
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    PhoneService
+    PhoneService,
+    PictureService
   ]
 })
 export class AppModule {}
