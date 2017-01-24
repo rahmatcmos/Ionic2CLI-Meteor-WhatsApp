@@ -11,6 +11,7 @@ import { ProfilePage } from '../pages/profile/profile';
 import { ChatsOptionsComponent } from '../pages/chats/chats-options';
 import { NewChatComponent } from '../pages/chats/new-chat';
 import { MessagesOptionsComponent } from '../pages/messages/messages-options';
+import { AgmCoreModule } from 'angular2-google-maps/core';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,10 @@ import { MessagesOptionsComponent } from '../pages/messages/messages-options';
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    MomentModule
+    MomentModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAWoBdZHCNh5R-hB5S5ZZ2oeoYyfdDgniA'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
