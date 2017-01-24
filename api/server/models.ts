@@ -3,6 +3,7 @@ export const DEFAULT_PICTURE_URL = '/ionicons/dist/svg/ios-contact.svg';
 export interface Profile {
   name?: string;
   picture?: string;
+  pictureId?: string;
 }
 
 export enum MessageType {
