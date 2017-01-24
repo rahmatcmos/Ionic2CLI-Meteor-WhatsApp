@@ -15,6 +15,7 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import { MessagesAttachmentsComponent } from '../pages/messages/messages-attachments';
 import { NewLocationMessageComponent } from '../pages/messages/location-message';
 import { PictureService } from '../services/picture';
+import { ShowPictureComponent } from '../pages/messages/show-picture';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PictureService } from '../services/picture';
     NewChatComponent,
     MessagesOptionsComponent,
     MessagesAttachmentsComponent,
-    NewLocationMessageComponent
+    NewLocationMessageComponent,
+    ShowPictureComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -49,7 +51,8 @@ import { PictureService } from '../services/picture';
     NewChatComponent,
     MessagesOptionsComponent,
     MessagesAttachmentsComponent,
-    NewLocationMessageComponent
+    NewLocationMessageComponent,
+    ShowPictureComponent
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},
