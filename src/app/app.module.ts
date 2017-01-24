@@ -3,11 +3,13 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { ChatsPage } from '../pages/chats/chats';
 import { MomentModule } from 'angular2-moment';
+import { MessagesPage } from '../pages/messages/messages';
 
 @NgModule({
   declarations: [
     MyApp,
-    ChatsPage
+    ChatsPage,
+    MessagesPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -16,7 +18,8 @@ import { MomentModule } from 'angular2-moment';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ChatsPage
+    ChatsPage,
+    MessagesPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
