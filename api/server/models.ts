@@ -1,3 +1,8 @@
+export interface Profile {
+  name?: string;
+  picture?: string;
+}
+
 export enum MessageType {
   TEXT = <any>'text'
 }
